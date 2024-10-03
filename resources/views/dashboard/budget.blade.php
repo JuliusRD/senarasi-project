@@ -29,7 +29,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-sm-12">
+        {{-- <div class="col-lg-4 col-sm-12">
             <div class="button-dashboard">
                 <button class="button-ini mb-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     INPUT
@@ -39,17 +39,18 @@
                     <button class="button-ini">REQUEST <span style="color: #ffe900">BUDGET</span></button>
                 </a>
             </div>
-        </div>
+        </div> --}}
     </div>
 
     <div class="tablenih mb-4" style="border: none; box-shadow: 0px 1px 8px -1px rgba(76, 37, 176, 0.505);">
         <div class="row p-3">
             <div class="col-lg-8 col-sm-12">
-                <div id="columnchart_material" style="height: 600px; position:relative; z-index:-1;"></div>
+                <!-- Removed z-index to ensure hover functionality works properly -->
+                <div id="chart_div" style="height: 600px;"></div>
             </div>
             <div class="col-lg-4 col-sm-12" style="margin-right:0px;">
                 <div style="font: 350 Narasi sans, sans-serif; ">
-                    <label for="chartType" class="form-label">Select Graphics by Program: </label>
+                    <label for="chartType" class="form-label">(DEMO MODE)Select Graphics by Program: </label>
                     <select id="chartType" class="form-select" onchange="changeChartType()">
                         <option selected disabled>Select Program</option>
                         <option value="total">Total Budget</option>
@@ -65,7 +66,7 @@
         </div>
     </div>
 
-    <div class="tablenih" style="border: none; box-shadow: 0px 1px 8px -1px rgba(76, 37, 176, 0.505);">
+    {{-- <div class="tablenih" style="border: none; box-shadow: 0px 1px 8px -1px rgba(76, 37, 176, 0.505);">
         <table class="table table-hover"
             style="font: 300 16px Narasi Sans, sans-serif; width: 100%; margin-top: 12px; margin-bottom: 12px; text-align: center">
             <thead style="font-weight: 500">
@@ -102,7 +103,7 @@
                 </tr>
             </tbody>
         </table>
-    </div>
+    </div> --}}
 @endsection
 @section('modal')
     <!-- Modal 1 -->
@@ -183,73 +184,16 @@
     </script>
     <script type="text/javascript">
         google.charts.load('current', {
-            'packages': ['bar', 'corechart']
+            'packages': ['bar', 'corechart', 'line']
         });
         google.charts.setOnLoadCallback(drawChart);
 
         function drawChart() {
-            drawChart1(); // By default, draw the column chart
-            drawChart2(); // By default, draw the pie chart
+            drawLineColors(); // Replacing drawChart1 with drawLineColors
+            drawChart2(); // Draw the pie chart by default
         }
 
-        function changeChartType() {
-            var selectedProgramId = document.getElementById("chartType").value;
-
-            if (selectedProgramId) {
-                fetch(`/api/getProgramData/${selectedProgramId}`)
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        if (data.error) {
-                            console.error('Error from API:', data.error);
-                        } else {
-                            drawPieChart(data); // Pass the fetched data to the drawPieChart function
-                        }
-                    })
-                    .catch(error => console.error('Error fetching program data:', error));
-            }
-        }
-
-        function drawPieChart(data) {
-            // Example using Google Charts
-            google.charts.load('current', {
-                'packages': ['corechart']
-            });
-            google.charts.setOnLoadCallback(function() {
-                var dataTable = new google.visualization.DataTable();
-                dataTable.addColumn('string', 'Type');
-                dataTable.addColumn('number', 'Amount');
-
-                data.forEach(item => {
-                    var usedBudget = item.yearly_budget - item.remaining_budget;
-                    dataTable.addRow(['Remaining Budget', item
-                        .remaining_budget
-                    ]);
-                    dataTable.addRow(['Used Budget', usedBudget]);
-                });
-
-                var options = {
-                    title: 'Budget Distribution by Program',
-                    pieHole: 0.4,
-                    backgroundColor: 'transparent',
-                    chartArea: {
-                        width: '100%',
-                        height: '100%',
-                        left: 60,
-                        top: 50,
-                    },
-                };
-
-                var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
-                chart.draw(dataTable, options);
-            });
-        }
-
-        function drawChart1() {
+        function drawLineColors() {
             var data = google.visualization.arrayToDataTable([
                 ['Month', 'Mata Najwa', 'Musyawarah', 'Mata Najwa', 'Musyawarah', 'Mata Najwa'],
                 ['Jan', 1000, 400, 200, 500, 300],
@@ -267,47 +211,100 @@
             ]);
 
             var options = {
-                chart: {
-                    title: 'Company Performance',
-                    subtitle: 'Sales, Expenses, and Profit: 2014-2017',
-                    backgroundColor: 'transparent',
-                    chartArea: {
-                        width: '200px',
-                        height: '100%',
-                        left: 60,
-                        top: 50
-                    },
-                }
+                title: '(DEMO MODE)Company Performance', // Chart title
+                hAxis: {
+                    title: 'Month' // X-axis label
+                },
+                vAxis: {
+                    title: 'Viewership' // Y-axis label
+                },
+                chartArea: {
+                    width: '100%',
+                    height: '70%',
+                    left: 60,
+                    top: 50
+                }, // Chart area configuration
+                colors: ['#a52714', '#097138', '#1f77b4', '#ff7f0e', '#2ca02c'], // Line colors
+                pointSize: 7, // Point size for better hover interaction
+                tooltip: {
+                    trigger: 'both' // Tooltips appear on both hover and selection
+                },
+                legend: {
+                    position: 'bottom'
+                }, // Add legend for clarity
+                crosshair: {
+                    trigger: 'both',
+                    orientation: 'vertical'
+                }, // Crosshair to make the chart interactive
+                focusTarget: 'category' // Focus on the x-axis categories (Month) when hovered
             };
 
-            var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-            chart.draw(data, google.charts.Bar.convertOptions(options));
+            var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+
+            chart.draw(data, options);
         }
 
         function drawChart2() {
-            var totalYearlyBudget = "{{ $totalBudget }}";
-            var totalRemainingBudget = "{{ $totalSpendingBudget }}";
             var data = google.visualization.arrayToDataTable([
-                ['Task', 'Budget'],
-                ['Total Yearly Budget', parseInt(totalYearlyBudget)],
-                ['Total Remaining Budget', parseInt(totalRemainingBudget)]
+                ['Task', 'Hours per Day'],
+                ['Work', 11],
+                ['Eat', 2],
+                ['Commute', 2],
+                ['Watch TV', 2],
+                ['Sleep', 7]
             ]);
 
             var options = {
-                title: 'Budget Distribution by Total',
                 pieHole: 0.4,
                 backgroundColor: 'transparent',
                 chartArea: {
                     width: '100%',
                     height: '100%',
                     left: 60,
-                    top: 50,
-                },
+                    top: 50
+                }
             };
 
             var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
             chart.draw(data, options);
         }
+
+        function drawChart3() {
+            var data = google.visualization.arrayToDataTable([
+                ['Task', 'Hours per Day'],
+                ['Bong', 11],
+                ['Sleep', 7]
+            ]);
+
+            var options = {
+                pieHole: 0.4,
+                backgroundColor: 'transparent',
+                chartArea: {
+                    width: '100%',
+                    height: '100%',
+                    left: 60,
+                    top: 50
+                }
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+            chart.draw(data, options);
+        }
+
+        function changeChartType() {
+            var selectedChart = document.getElementById("chartType").value;
+            if (selectedChart === "pie") {
+                drawChart2();
+            } else if (selectedChart === "column") {
+                drawChart3();
+            }
+        }
+
+        window.onresize = function() {
+            drawLineColors(); // Replacing drawChart1 with drawLineColors
+            drawChart2();
+            drawChart3(); // or drawLineColors() depending on the selected chart
+        };
     </script>
     <script>
         var budgetInput = document.getElementById('quarter_budget');

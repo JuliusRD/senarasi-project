@@ -63,7 +63,7 @@
         <li class="nav-item" role="presentation">
             <button class="nav-link tablinks" id="preview-tab" data-bs-toggle="tab" data-bs-target="#preview-tab-pane"
                 type="button" role="tab" aria-controls="preview-tab-pane" aria-selected="false"
-                disabled>Preview</button>
+                disabled>Preview & Submit</button>
         </li>
         <li class="nav-item" role="presentation">
         </li>

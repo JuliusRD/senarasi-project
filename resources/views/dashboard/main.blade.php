@@ -391,7 +391,7 @@ margin-bottom: 24px;
                                     <path fill="#a6a6a6" d="M15.533 15.39a.5.5 0 0 0 .651.233l4.823-2.15c1.323-.59 1.323-2.355 0-2.945L12.109 6.56a.5.5 0 0 0-.651.68z" opacity="0.5"/>
                                 </svg>
                                 <div>
-                                    <span style="font-size: 18px; font-weight: 500;">Company File Documents</span>
+                                    <span style="font-size: 18px; font-weight: 500;">(DEMO MODE)Company File Documents</span>
                                     <p style="   font-style: italic; color:#bababa; margin-top:-8px;">List of Company File Document </p>
                                 </div>
                             </a>
@@ -402,7 +402,7 @@ margin-bottom: 24px;
                                     <path fill="#a6a6a6" d="M15.533 15.39a.5.5 0 0 0 .651.233l4.823-2.15c1.323-.59 1.323-2.355 0-2.945L12.109 6.56a.5.5 0 0 0-.651.68z" opacity="0.5"/>
                                 </svg>
                                 <div>
-                                    <span style="font-size: 18px; font-weight: 500;">Transportation Request</span>
+                                    <span style="font-size: 18px; font-weight: 500;">(ON PROGRESS)Transportation Request</span>
                                     <p style="   font-style: italic; color:#bababa; margin-top:-8px;">Request Driver and Transportation</p>
                                 </div>
                             </a>
@@ -413,7 +413,7 @@ margin-bottom: 24px;
                                     <path fill="#a6a6a6" d="M15.533 15.39a.5.5 0 0 0 .651.233l4.823-2.15c1.323-.59 1.323-2.355 0-2.945L12.109 6.56a.5.5 0 0 0-.651.68z" opacity="0.5"/>
                                 </svg>
                                 <div>
-                                    <span style="font-size: 18px; font-weight: 500;">Booking Room</span>
+                                    <span style="font-size: 18px; font-weight: 500;">(DEMO MODE)Booking Room</span>
                                     <p style="   font-style: italic; color:#bababa; margin-top:-8px;">Book Room Meeting</p>
                                 </div>
                             </a>

@@ -5,9 +5,9 @@
 </head>
 <body>
     <h1>Final Approval Completed</h1>
-    <p>Dear {{ $requestBudget->employee->name }},</p>
+    <p>Dear {{ $requestBudget->employee->full_name }},</p>
     <p>Your budget request has been fully approved.</p>
-    <p><strong>Request ID:</strong> {{ $requestBudget->id }}</p>
+    <p><strong>Request ID:</strong> {{ $requestBudget->request_budget_id }}</p>
     <p><strong>Budget:</strong> {{ $requestBudget->budget }}</p>
     <p><strong>Total Cost:</strong> {{ $totalAll }}</p>
 

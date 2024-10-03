@@ -93,7 +93,48 @@ class PreviewController extends Controller
             }
         }
 
-        // Process initial submission logic here...
+        // Process the initial submission if no budget request exists or if it's not a resubmission
+        $approverIds = [
+            'manager' => $request->input('manager_id'), // Example: Employee ID for manager
+            'reviewer' => '3', // Example: Employee ID for reviewer
+            'hc' => '7', // Example: Employee ID for the new approver after reviewer
+            'finance 1' => '5', // Employee ID for finance 1
+        ];
+
+        // If the budget is greater than or equal to 200 million, add finance 2
+        if ($request->input('budget') >= 200000000) {
+            $approverIds['finance 2'] = '6'; // Employee ID for finance 2
+        }
+
+        // Create approval stages
+        foreach ($approverIds as $stage => $employeeId) {
+            // Validate stage to prevent check constraint violation
+            if (!in_array($stage, ['manager', 'reviewer', 'hc', 'finance 1', 'finance 2'])) {
+                continue; // Skip invalid stages
+            }
+
+            // Create the approval record only if it doesn't already exist (initial submission)
+            $existingApproval = $requestBudget ? $requestBudget->approval->where('stage', $stage)->first() : null;
+            if (!$existingApproval) {
+                Approval::create([
+                    'request_budget_id' => $request->input('request_budget_id'),
+                    'employee_id' => $employeeId,
+                    'stage' => $stage,
+                    'status' => 'pending',
+                    'reason' => [], // Set the initial reason to an empty array
+                ]);
+            }
+        }
+
+        // Validate the request data for history creation
+        $validateData = $request->validate([
+            'employee_id' => 'required|exists:employees,employee_id',
+            'request_budget_id' => 'required|exists:request_budgets,request_budget_id',
+            'history_status' => 'required|string|max:255'
+        ]);
+
+        // Create the history for the initial submission or resubmission
+        History::create($validateData);
 
         // Generate the PDF report (you can reuse the report function logic)
         $pdf = $this->report($requestBudget->request_budget_id)->output(); // Get the PDF output

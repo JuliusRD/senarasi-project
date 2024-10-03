@@ -185,7 +185,7 @@ border: none;
                 </a>
                 <ul id="budget" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                     <li class="sidebar-item" style="list-style: none;">
-                        <a href="{{ route('budget.index') }}" class="sidebar-link">Budget Department</a>
+                        <a href="{{ route('budget.index') }}" class="sidebar-link">(ON PROGRESS)Budget Department</a>
                     </li>
                     <li class="sidebar-item" style="list-style: none;">
                         <a href="{{ route('budget.index') }}" class="sidebar-link">Budget Program</a>
@@ -207,7 +207,7 @@ border: none;
                     <li class="sidebar-item" style="list-style: none;">
                         <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse"
                             data-bs-target="#request-two" aria-expanded="false" aria-controls="request-two">
-                            Department
+                            (ON PROGRESS)Department
                         </a>
                         <ul id="request-two" class="sidebar-dropdown list-unstyled collapse">
                             <li class="sidebar-item" style="list-style: none;">
@@ -256,7 +256,7 @@ border: none;
                     <li class="sidebar-item" style="list-style: none;">
                         <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse"
                             data-bs-target="#approval-two" aria-expanded="false" aria-controls="approval-two">
-                            Department
+                            (ON PROGRESS)Department
                         </a>
                         <ul id="approval-two" class="sidebar-dropdown list-unstyled collapse">
                             <li class="sidebar-item" style="list-style: none;">
@@ -309,7 +309,7 @@ border: none;
                     <li class="sidebar-item" style="list-style: none;">
                         <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse"
                             data-bs-target="#report-two" aria-expanded="false" aria-controls="report-two">
-                            Department
+                            (ON PROGRESS)Department
                         </a>
                         <ul id="report-two" class="sidebar-dropdown list-unstyled collapse">
                             <li class="sidebar-item" style="list-style: none;">

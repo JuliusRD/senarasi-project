@@ -51,7 +51,7 @@
         <li class="nav-item" role="presentation">
             <button class="nav-link active tablinks" id="preview-tab" data-url="{{ route('request-budget.preview', $id) }}"
                 data-bs-toggle="tab" data-bs-target="#preview-tab-pane" type="button" role="tab"
-                aria-controls="preview-tab-pane" aria-selected="false" disabled>Preview</button>
+                aria-controls="preview-tab-pane" aria-selected="false" disabled>Preview & Submit</button>
         </li>
         <li class="nav-item" role="presentation">
         </li>
